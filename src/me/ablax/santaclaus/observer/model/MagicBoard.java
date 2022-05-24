@@ -12,25 +12,25 @@ import java.util.List;
  */
 public class MagicBoard implements Observable {
 
-   private static MagicBoard INSTANCE = new MagicBoard();
-   static {
-       try {
-           Class.forName("me.ablax.santaclaus.observer.pool.ElfPool");
-           INSTANCE.subscribe(ElfPool.getInstance());
-       } catch (ClassNotFoundException e) {
-           throw new RuntimeException(e);
-       }
-   }
+    private static MagicBoard INSTANCE = new MagicBoard();
 
-    public static MagicBoard getInstance() {
-        return INSTANCE;
+    static {
+        try {
+            Class.forName("me.ablax.santaclaus.observer.pool.ElfPool");
+            INSTANCE.subscribe(ElfPool.getInstance());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private final List<Observer> observerList;
     private String topic;
-
     private MagicBoard() {
         this.observerList = new ArrayList<>();
+    }
+
+    public static MagicBoard getInstance() {
+        return INSTANCE;
     }
 
     public void requestToy(final String topic) {

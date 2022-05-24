@@ -5,12 +5,12 @@ import me.ablax.santaclaus.model.interfaces.Toy;
 
 public abstract class AbstractFactory {
 
-    protected static void register (final String factoryName, final Class<? extends AbstractFactory> factoryClass) {
+    protected static void register(final String factoryName, final Class<? extends AbstractFactory> factoryClass) {
         FactoryProvider.registerFactory(factoryName, factoryClass);
     }
 
 
-    protected void prepareMaterials(){
+    protected void prepareMaterials() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

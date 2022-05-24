@@ -4,7 +4,7 @@ import me.ablax.santaclaus.factory.FactoryProvider;
 import me.ablax.santaclaus.factory.interfaces.AbstractFactory;
 import me.ablax.santaclaus.model.interfaces.Toy;
 
-public class Elf  {
+public class Elf {
 
     public void buildToy() {
         final String toyToBuild = MagicBoard.getInstance().getUpdate();

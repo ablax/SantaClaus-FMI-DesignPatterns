@@ -10,7 +10,7 @@ public class FactoryProvider {
 
     private static final Map<String, Class<? extends AbstractFactory>> factoryMap = new HashMap<>();
 
-     static {
+    static {
         //Usually some reflections to scan all Classes in given package - but for a project with two factories it's not worth it.
         try {
             Class.forName("me.ablax.santaclaus.factory.toys.BicycleFactory");
@@ -21,17 +21,18 @@ public class FactoryProvider {
     }
 
     public static void registerFactory(final String factoryName, final Class<? extends AbstractFactory> abstractFactory) {
-        if(!factoryMap.containsKey(factoryName)){
+        if (!factoryMap.containsKey(factoryName)) {
             factoryMap.put(factoryName, abstractFactory);
-        }else{
+        } else {
             throw new RuntimeException("This factory is already registered!");
         }
     }
 
-    public static AbstractFactory getFactory(final String factoryName){
+    public static AbstractFactory getFactory(final String factoryName) {
         try {
             return factoryMap.get(factoryName).getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
     }
