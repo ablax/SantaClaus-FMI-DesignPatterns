@@ -24,9 +24,10 @@ public class MainClass {
 
         final int toMakeCount = toysToMake.size();
         final int madeCount = Workshop.getToys().size();
-        if(toMakeCount == madeCount){
+
+        if (toMakeCount == madeCount) {
             System.out.println("All requested toys were built!");
-        }else{
+        } else {
             System.out.println("Needed toys - " + toMakeCount);
             System.out.println("Made toys - " + madeCount);
             System.out.println("Elves seem to have been slacking and there will be kids left without toys.");

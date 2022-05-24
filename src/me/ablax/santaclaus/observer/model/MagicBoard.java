@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 public final class MagicBoard implements Observable {
 
     private static final ExecutorService executor = Executors.newCachedThreadPool();
-    private static MagicBoard INSTANCE = new MagicBoard();
+    private static final MagicBoard INSTANCE = new MagicBoard();
 
     static {
         try {
@@ -26,6 +26,7 @@ public final class MagicBoard implements Observable {
     }
 
     private final List<Observer> observerList;
+
     private MagicBoard() {
         this.observerList = new ArrayList<>();
     }

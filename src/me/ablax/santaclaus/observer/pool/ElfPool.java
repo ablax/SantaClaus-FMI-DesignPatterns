@@ -11,11 +11,11 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public final class ElfPool implements Observer {
 
-    private static AtomicLong elfId = new AtomicLong(0);
     private final static ElfPool INSTANCE = new ElfPool();
     private final static int MAXIMUM_ELVES = 50;
     private final static List<Elf> availableElves = new CopyOnWriteArrayList<>();
     private final static List<Elf> busyElves = new CopyOnWriteArrayList<>();
+    private static final AtomicLong elfId = new AtomicLong(0);
 
     private ElfPool() {
         // Singleton
@@ -27,9 +27,9 @@ public final class ElfPool implements Observer {
 
     public static Elf getAvailableElf() {
         final Elf elf;
-        while(availableElves.size() + busyElves.size() > MAXIMUM_ELVES){
+        while (availableElves.size() + busyElves.size() > MAXIMUM_ELVES) {
             try {
-                Thread.sleep(250 + new Random().nextInt(0,250));
+                Thread.sleep(250 + new Random().nextInt(0, 250));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -45,7 +45,7 @@ public final class ElfPool implements Observer {
     public static void freeElf(final Elf elf) {
         if (busyElves.contains(elf)) {
             busyElves.remove(elf);
-            if (availableElves.size() + busyElves.size() < MAXIMUM_ELVES - 15) {
+            if (availableElves.size() < MAXIMUM_ELVES) {
                 availableElves.add(elf);
             }
             return;

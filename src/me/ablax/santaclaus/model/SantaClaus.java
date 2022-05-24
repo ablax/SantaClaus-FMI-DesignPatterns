@@ -18,7 +18,11 @@ public final class SantaClaus {
         //Singleton
     }
 
-    public List<Future<Toy>> buildDolls(int number){
+    public static SantaClaus getInstance() {
+        return SantaClaus.INSTANCE;
+    }
+
+    public List<Future<Toy>> buildDolls(int number) {
         final List<Future<Toy>> futureToys = new CopyOnWriteArrayList<>();
         for (int i = 0; i < number; i++) {
             futureToys.add(executor.submit(() -> Workshop.getInstance().buildDoll()));
@@ -26,16 +30,12 @@ public final class SantaClaus {
         return futureToys;
     }
 
-    public List<Future<Toy>> buildBicycles(int number){
+    public List<Future<Toy>> buildBicycles(int number) {
         final List<Future<Toy>> futureToys = new CopyOnWriteArrayList<>();
         for (int i = 0; i < number; i++) {
             futureToys.add(executor.submit(() -> Workshop.getInstance().buildBicycle()));
         }
         return futureToys;
-    }
-
-    public static SantaClaus getInstance() {
-        return SantaClaus.INSTANCE;
     }
 
 }

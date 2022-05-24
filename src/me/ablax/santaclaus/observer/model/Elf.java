@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Elf {
 
-    private long elfId;
+    private final long elfId;
 
     public Elf(final long elfId) {
         this.elfId = elfId;
