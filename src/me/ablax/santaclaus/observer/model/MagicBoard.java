@@ -1,17 +1,19 @@
 package me.ablax.santaclaus.observer.model;
 
+import me.ablax.santaclaus.model.interfaces.Toy;
 import me.ablax.santaclaus.observer.interfaces.Observable;
 import me.ablax.santaclaus.observer.interfaces.Observer;
 import me.ablax.santaclaus.observer.pool.ElfPool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-/**
- * @author Murad Hamza on 4/5/22
- */
-public class MagicBoard implements Observable {
+public final class MagicBoard implements Observable {
 
+    private static final ExecutorService executor = Executors.newCachedThreadPool();
     private static MagicBoard INSTANCE = new MagicBoard();
 
     static {
@@ -24,7 +26,6 @@ public class MagicBoard implements Observable {
     }
 
     private final List<Observer> observerList;
-    private String topic;
     private MagicBoard() {
         this.observerList = new ArrayList<>();
     }
@@ -33,9 +34,8 @@ public class MagicBoard implements Observable {
         return INSTANCE;
     }
 
-    public void requestToy(final String topic) {
-        this.topic = topic;
-        this.notifyObservers();
+    public Toy requestToy(final String topic) {
+        return this.notifyObservers(topic);
     }
 
     @Override
@@ -48,12 +48,16 @@ public class MagicBoard implements Observable {
         this.observerList.remove(observer);
     }
 
-    protected void notifyObservers() {
-        this.observerList.parallelStream().forEach(Observer::update);
+    private Toy notifyObservers(final String topic) {
+        Toy toy = null;
+        for (Observer observer : this.observerList) {
+            try {
+                toy = executor.submit(() -> observer.update(topic)).get();
+            } catch (InterruptedException | ExecutionException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        return toy;
     }
 
-    @Override
-    public String getUpdate() {
-        return topic;
-    }
 }
