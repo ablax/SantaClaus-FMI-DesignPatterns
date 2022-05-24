@@ -12,7 +12,7 @@ public abstract class AbstractFactory {
 
     protected void prepareMaterials(){
         try {
-            Thread.sleep(600);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
