@@ -1,6 +1,6 @@
 package me.ablax.santaclaus.model;
 
-public class SantaClaus {
+public final class SantaClaus {
 
     private static final SantaClaus INSTANCE = new SantaClaus();
 

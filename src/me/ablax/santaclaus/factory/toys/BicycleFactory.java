@@ -11,6 +11,7 @@ public class BicycleFactory extends AbstractFactory {
 
     @Override
     public Bicycle produce() {
+        prepareMaterials();
         return new Bicycle();
     }
 }

@@ -1,6 +1,6 @@
 package me.ablax.santaclaus.model.toys;
 
-import me.ablax.santaclaus.model.Toy;
+import me.ablax.santaclaus.model.interfaces.Toy;
 
 public class Bicycle implements Toy {
 

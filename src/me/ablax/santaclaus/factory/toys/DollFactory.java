@@ -11,6 +11,7 @@ public class DollFactory extends AbstractFactory {
 
     @Override
     public Doll produce() {
+        prepareMaterials();
         return new Doll();
     }
 

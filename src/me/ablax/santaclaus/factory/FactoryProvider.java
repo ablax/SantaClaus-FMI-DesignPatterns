@@ -11,7 +11,7 @@ public class FactoryProvider {
     private static final Map<String, Class<? extends AbstractFactory>> factoryMap = new HashMap<>();
 
      static {
-        //Usually some reflections to scan all Classes in givem packag - but for a project with two factoris it's not worth it.
+        //Usually some reflections to scan all Classes in given package - but for a project with two factories it's not worth it.
         try {
             Class.forName("me.ablax.santaclaus.factory.toys.BicycleFactory");
             Class.forName("me.ablax.santaclaus.factory.toys.DollFactory");
